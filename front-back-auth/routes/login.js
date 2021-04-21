@@ -13,13 +13,13 @@ router.get('/', authMiddleware, (req, res) => {
         .select('-password')
         .then(user => {
             if (!user) {
-                return res.status(404).json({ msg: 'User not found!' });
+                return res.status(404).json({ errors:[{msg: 'User not found!'}] });
             }
             res.status(200).json(user)
         })
         .catch((err) => {
             console.error(err.message);
-            res.status(500).send({ msg: 'Server Error' })
+            res.status(500).json({ msg: 'Server Error' })
         });
 });
 

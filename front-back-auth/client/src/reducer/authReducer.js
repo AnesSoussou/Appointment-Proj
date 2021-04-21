@@ -2,7 +2,7 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL, LOGIN_SUCCESS,
     LOGIN_FAIL, LOAD_USER_SUCCESS,
-    LOAD_USER_FAIL, LOGOUT
+    LOAD_USER_FAIL, LOGOUT, CLIENT_ADDED, CLIENT_ADD_FAIL
 } from '../actions/types';
 let initState = {
     token: localStorage.getItem('token'),
@@ -19,6 +19,7 @@ const AuthReducer = (state = initState, action) => {
                 user: action.payload,
                 error: null,
             };
+        case CLIENT_ADDED:
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token)
@@ -28,6 +29,7 @@ const AuthReducer = (state = initState, action) => {
                 isAuth: true,
                 error: null
             }
+        case CLIENT_ADD_FAIL:
         case LOGIN_FAIL:
         case LOAD_USER_FAIL:
         case REGISTER_FAIL:
